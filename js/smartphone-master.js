@@ -54,6 +54,16 @@ const showPhoneDetails = phoneDetail => {
                     <small class="text-muted">Memory: ${phoneDetail.mainFeatures.memory}</small><br />
                     <small class="text-muted">Storage: ${phoneDetail.mainFeatures.storage}</small><br />
                     <small class="text-muted">Display Size: ${phoneDetail.mainFeatures.displaySize}</small><br />
+                    <small class="text-muted">Sensors: ${phoneDetail.mainFeatures.sensors}</small><br />
+                    </p>
+                    <p class="card-text">
+                        Others<br />
+                        <small class="text-muted">Bluetooth: ${phoneDetail.others.Bluetooth}</small><br />
+                        <small class="text-muted">GPS: ${phoneDetail.others.GPS}</small><br />
+                        <small class="text-muted">NFC: ${phoneDetail.others.NFC}</small><br />
+                        <small class="text-muted">Radio: ${phoneDetail.others.Radio}</small><br />
+                        <small class="text-muted">USB: ${phoneDetail.others.USB}</small><br />
+                        <small class="text-muted">WLAN: ${phoneDetail.others.WLAN}</small><br />
                     </p>
                     </div>
                 </div>
