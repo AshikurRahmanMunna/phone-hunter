@@ -39,12 +39,12 @@ const showPhoneDetails = phoneDetail => {
     detailsContainer.textContent = '';
     const div = document.createElement('div');
     div.innerHTML = `
-        <div class="card mb-3 mx-auto" style="max-width: 540px;">
+        <div class="card mb-3 mx-auto w-75">
             <div class="row g-0">
-                <div class="col-md-4 my-auto ps-2">
+                <div class="col-md-2 my-auto mx-auto ps-2">
                     <img src="${phoneDetail.image}" class="img-fluid rounded-start" alt="...">
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-10">
                     <div class="card-body">
                     <h5 class="card-title">${phoneDetail.name}</h5>
                     <p class="card-text">
