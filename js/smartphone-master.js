@@ -1,5 +1,8 @@
-    const spinner = document.getElementById('spinner');
-    spinner.style.display = 'none';
+// spinner for using everywhere
+const spinner = document.getElementById('spinner');
+spinner.style.display = 'none';
+
+// get phones
 const getPhones = () => {
     const searchText = document.getElementById('search-input').value;
     const errorMessageContainer = document.getElementById('error');
@@ -7,16 +10,17 @@ const getPhones = () => {
         errorMessageContainer.innerHTML = `
             <h1 class="text-danger text-center mt-5">Please Input Any Text To Search</h1>
         `;
+        spinner.style.display = 'none';
     }
     else {
         fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`)
         .then(res => res.json())
         .then(data => displayPhones(data.data));
+        spinner.style.display = 'block';
     }
-    const spinner = document.getElementById('spinner');
-    spinner.style.display = 'block';
 }
 
+// display phones
 const displayPhones = phones => {
     if(phones.length > 20) {
         phones.length = 20;
@@ -28,7 +32,8 @@ const displayPhones = phones => {
         errorMessageContainer.innerHTML = `
             <h1 class="text-danger text-center mt-5">No Results Found</h1>
         `;
-    }else {
+    }
+    else {
         errorMessageContainer.textContent = '';
     const phonesContainer = document.getElementById('phones-container');
     phonesContainer.textContent = '';
@@ -47,12 +52,13 @@ const displayPhones = phones => {
                 </div>
             </div>
         </div>
-        `
+        `;
         phonesContainer.appendChild(div);
+        spinner.style.display = 'none';
     })        
     }
 }
-
+// get phone details
 const getPhoneDetails = phoneId => {
     fetch(`https://openapi.programming-hero.com/api/phone/${phoneId}`)
     .then(res => res.json())
@@ -97,6 +103,5 @@ const showPhoneDetails = phoneDetail => {
         </div>
     `;
     detailsContainer.appendChild(div);
-    const spinner = document.getElementById('spinner');
     spinner.style.display = 'none';
 }

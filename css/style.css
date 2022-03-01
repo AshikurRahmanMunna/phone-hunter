@@ -1,6 +1,7 @@
 body {
     background: rgb(243, 243, 243);
 }
+/* border radius */
 .border-radius {
     border-radius: 20px;
 }
