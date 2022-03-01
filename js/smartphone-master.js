@@ -1,10 +1,34 @@
 const getPhones = () => {
     const searchText = document.getElementById('search-input').value;
-    fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`)
-    .then(res => res.json())
-    .then(data => displayPhones(data.data));
+    const errorMessageContainer = document.getElementById('error');
+    if(searchText === '') {
+        errorMessageContainer.innerHTML = `
+            <h1>Please Input Any Text To Search</h1>
+        `;
+    }
+    else {
+        fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`)
+        .then(res => res.json())
+        .then(data => displayPhones(data.data));
+    }
 }
+    // const showAll = document.getElementById('show-all');
+    // showAll.style.display = 'none';
 const displayPhones = phones => {
+    // if(phones.length > 20) {
+    //     phones.length = 20;
+    //     showAll.style.display = 'block';
+    // }
+    console.log(phones);
+    const errorMessageContainer = document.getElementById('error');
+    if(phones.length == 0) {
+        const phonesContainer = document.getElementById('phones-container');
+        phonesContainer.textContent = '';
+        errorMessageContainer.innerHTML = `
+            <h1 class="text-danger text-center mt-5">No Results Found</h1>
+        `;
+    }else {
+        errorMessageContainer.textContent = '';
     const phonesContainer = document.getElementById('phones-container');
     phonesContainer.textContent = '';
     phones.forEach(phone => {
@@ -24,7 +48,8 @@ const displayPhones = phones => {
         </div>
         `
         phonesContainer.appendChild(div);
-    })
+    })        
+    }
 }
 
 const getPhoneDetails = phoneId => {
