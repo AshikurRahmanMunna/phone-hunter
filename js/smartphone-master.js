@@ -1,9 +1,11 @@
+    const spinner = document.getElementById('spinner');
+    spinner.style.display = 'none';
 const getPhones = () => {
     const searchText = document.getElementById('search-input').value;
     const errorMessageContainer = document.getElementById('error');
     if(searchText === '') {
         errorMessageContainer.innerHTML = `
-            <h1>Please Input Any Text To Search</h1>
+            <h1 class="text-danger text-center mt-5">Please Input Any Text To Search</h1>
         `;
     }
     else {
@@ -11,15 +13,14 @@ const getPhones = () => {
         .then(res => res.json())
         .then(data => displayPhones(data.data));
     }
+    const spinner = document.getElementById('spinner');
+    spinner.style.display = 'block';
 }
-    // const showAll = document.getElementById('show-all');
-    // showAll.style.display = 'none';
+
 const displayPhones = phones => {
-    // if(phones.length > 20) {
-    //     phones.length = 20;
-    //     showAll.style.display = 'block';
-    // }
-    console.log(phones);
+    if(phones.length > 20) {
+        phones.length = 20;
+    }
     const errorMessageContainer = document.getElementById('error');
     if(phones.length == 0) {
         const phonesContainer = document.getElementById('phones-container');
@@ -35,14 +36,14 @@ const displayPhones = phones => {
         const div = document.createElement('div');
         div.innerHTML = `
         <div class="col">
-            <div class="card">
-                <img src="${phone.image}" class="card-img-top img-fluid w-100" alt="${phone.phone_name}">
+            <div class="card shadow p-4 border-radius">
+                <img src="${phone.image}" class="card-img-top img-fluid" alt="${phone.phone_name}">
                 <div class="card-body">
                     <h5 class="card-title">${phone.phone_name}</h5>
                     <h5 class="card-title">${phone.brand}</h5>
                 </div>
                 <div class="ms-3 mb-3">
-                    <button class="btn btn-primary" onclick="getPhoneDetails('${phone.slug}')">Details</button>
+                    <button class="btn btn-dark" onclick="getPhoneDetails('${phone.slug}')">Details</button>
                 </div>
             </div>
         </div>
@@ -64,10 +65,10 @@ const showPhoneDetails = phoneDetail => {
     detailsContainer.textContent = '';
     const div = document.createElement('div');
     div.innerHTML = `
-        <div class="card mb-3 mx-auto w-75">
+        <div class="card mb-3 mx-auto w-75 border-radius">
             <div class="row g-0">
-                <div class="col-md-2 my-auto mx-auto ps-2">
-                    <img src="${phoneDetail.image}" class="img-fluid rounded-start" alt="...">
+                <div class="col-md-2 my-auto ps-2 pt-3 text-center">
+                    <img src="${phoneDetail.image}" class="img-fluid rounded-start" alt="${phoneDetail.name}">
                 </div>
                 <div class="col-md-10">
                     <div class="card-body">
@@ -83,12 +84,12 @@ const showPhoneDetails = phoneDetail => {
                     </p>
                     <p class="card-text">
                         Others<br />
-                        <small class="text-muted">Bluetooth: ${phoneDetail.others.Bluetooth}</small><br />
-                        <small class="text-muted">GPS: ${phoneDetail.others.GPS}</small><br />
-                        <small class="text-muted">NFC: ${phoneDetail.others.NFC}</small><br />
-                        <small class="text-muted">Radio: ${phoneDetail.others.Radio}</small><br />
-                        <small class="text-muted">USB: ${phoneDetail.others.USB}</small><br />
-                        <small class="text-muted">WLAN: ${phoneDetail.others.WLAN}</small><br />
+                        <small class="text-muted">Bluetooth: ${phoneDetail.others?.Bluetooth ? phoneDetail.others.Bluetooth: 'No data'}</small><br />
+                        <small class="text-muted">GPS: ${phoneDetail.others?.GPS ? phoneDetail.others.GPS: 'No data'}</small><br />
+                        <small class="text-muted">NFC: ${phoneDetail.others?.NFC ? phoneDetail.others.NFC: 'No data'}</small><br />
+                        <small class="text-muted">Radio: ${phoneDetail.others?.Radio ? phoneDetail.others.Radio: 'No data'}</small><br />
+                        <small class="text-muted">USB: ${phoneDetail.others?.USB ? phoneDetail.others.USB: 'No data'}</small><br />
+                        <small class="text-muted">WLAN: ${phoneDetail.others?.WLAN ? phoneDetail.others.WLAN: 'No data'}</small><br />
                     </p>
                     </div>
                 </div>
@@ -96,4 +97,6 @@ const showPhoneDetails = phoneDetail => {
         </div>
     `;
     detailsContainer.appendChild(div);
+    const spinner = document.getElementById('spinner');
+    spinner.style.display = 'none';
 }
