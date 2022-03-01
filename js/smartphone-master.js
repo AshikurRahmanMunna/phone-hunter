@@ -11,6 +11,8 @@ const getPhones = () => {
             <h1 class="text-danger text-center mt-5">Please Input Any Text To Search</h1>
         `;
         spinner.style.display = 'none';
+        const detailsContainer = document.getElementById('phone-details');
+        detailsContainer.textContent = '';
     }
     else {
         fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`)
@@ -32,6 +34,7 @@ const displayPhones = phones => {
         errorMessageContainer.innerHTML = `
             <h1 class="text-danger text-center mt-5">No Results Found</h1>
         `;
+        spinner.style.display = 'none';
     }
     else {
         errorMessageContainer.textContent = '';
